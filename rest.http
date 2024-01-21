@@ -1,0 +1,35 @@
+### GET /users
+GET http://localhost:8080/users HTTP/1.1
+
+### POST /auth/register
+POST http://localhost:8080/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  	"email": "john1@gmail.com",
+  	"password": "John1223!",
+  	"confirm_password": "John1223!"
+}
+
+### POST /auth/login
+POST http://localhost:8080/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  	"email": "john@gmail.com",
+  	"password": "John123!"
+}
+
+### POST /auth/signout
+POST http://localhost:8080/auth/signout HTTP/1.1
+
+### POST /permissions
+POST http://localhost:8080/permissions HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "edit_permissions"
+}
+
+### GET /permissions
+GET http://localhost:8080/permissions HTTP/1.1
