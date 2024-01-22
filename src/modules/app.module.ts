@@ -1,15 +1,18 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { APP_GUARD } from '@nestjs/core'
 import * as process from 'process'
+
 import { configValidationSchema } from '../config/schema.config'
-import { DatabaseModule } from './database/database.module'
 import { LoggerMiddleware } from '../middleware/logger.middleware'
-import {UsersModule} from "./users/users.module";
-import {AuthModule} from "./auth/auth.module";
-import {RolesModule} from "./roles/roles.module";
-import {PermissionsModule} from "./permissions/permissions.module";
-import {APP_GUARD} from "@nestjs/core";
-import {PermissionsGuard} from "./permissions/guards/permission.guard";
+import { AuthModule } from './auth/auth.module'
+import { DatabaseModule } from './database/database.module'
+import { PermissionsGuard } from './permissions/guards/permission.guard'
+import { PermissionsModule } from './permissions/permissions.module'
+import { ProductsModule } from './products/products.module'
+import { RolesModule } from './roles/roles.module'
+import { UsersModule } from './users/users.module'
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -19,19 +22,20 @@ import {PermissionsGuard} from "./permissions/guards/permission.guard";
       validationSchema: configValidationSchema,
     }),
     DatabaseModule,
-      UsersModule,
-      AuthModule,
-      RolesModule,
-      PermissionsModule,
+    UsersModule,
+    AuthModule,
+    RolesModule,
+    PermissionsModule,
+    ProductsModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: PermissionsGuard
-    }
+      useClass: PermissionsGuard,
+    },
   ],
-
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
